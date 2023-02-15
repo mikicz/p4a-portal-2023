@@ -29,280 +29,10 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     <script type="application/javascript">
-        let rewardStatistics = [
-  {
-    "count": 25,
-    "total": 7500.0,
-    "name": "Hanklerfish Art",
-    "base_price": 300.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 52.82203481746818,
-    "average": 300.0
-  },
-  {
-    "count": 24,
-    "total": 1595.0,
-    "name": "Digital Download Bundle",
-    "base_price": 65.0,
-    "raised_over_base": 35.0,
-    "percentage_of_total": 11.233486071181565,
-    "average": 66.45833333333333
-  },
-  {
-    "count": 4,
-    "total": 1400.0,
-    "name": "Dear Hank & John Personal Message",
-    "base_price": 350.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 9.860113165927393,
-    "average": 350.0
-  },
-  {
-    "count": 3,
-    "total": 1050.0,
-    "name": "John's Secret Keepers",
-    "base_price": 350.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 7.395084874445544,
-    "average": 350.0
-  },
-  {
-    "count": 19,
-    "total": 380.42,
-    "name": "Send Hank & John to RAX",
-    "base_price": 20.0,
-    "raised_over_base": 0.4200000000000159,
-    "percentage_of_total": 2.679274464701499,
-    "average": 20.022105263157897
-  },
-  {
-    "count": 4,
-    "total": 280.0,
-    "name": "2023 P4A Quarter Zip",
-    "base_price": 70.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 1.9720226331854784,
-    "average": 70.0
-  },
-  {
-    "count": 1,
-    "total": 250.0,
-    "name": "Sarah's \"Doubles\" Prints",
-    "base_price": 250.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 1.760734493915606,
-    "average": 250.0
-  },
-  {
-    "count": 2,
-    "total": 235.0,
-    "name": "Signed John Green Book",
-    "base_price": 85.0,
-    "raised_over_base": 65.0,
-    "percentage_of_total": 1.6550904242806692,
-    "average": 117.5
-  },
-  {
-    "count": 7,
-    "total": 215.0,
-    "name": "2023 P4A Commemorative Coin",
-    "base_price": 25.0,
-    "raised_over_base": 40.0,
-    "percentage_of_total": 1.514231664767421,
-    "average": 30.714285714285715
-  },
-  {
-    "count": 3,
-    "total": 180.0,
-    "name": "Awesome Socks Club Bundle M/L",
-    "base_price": 60.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 1.2677288356192362,
-    "average": 60.0
-  },
-  {
-    "count": 1,
-    "total": 175.0,
-    "name": "DFTBA Wall Hanging",
-    "base_price": 175.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 1.232514145740924,
-    "average": 175.0
-  },
-  {
-    "count": 6,
-    "total": 145.0,
-    "name": "2023 P4A Enamel Pin",
-    "base_price": 24.0,
-    "raised_over_base": 1.0,
-    "percentage_of_total": 1.0212260064710514,
-    "average": 24.166666666666668
-  },
-  {
-    "count": 3,
-    "total": 135.0,
-    "name": "Nerdfighter Art First Half",
-    "base_price": 45.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.9507966267144272,
-    "average": 45.0
-  },
-  {
-    "count": 7,
-    "total": 115.0,
-    "name": "Exclusive Dear Hank & John Episode",
-    "base_price": 15.0,
-    "raised_over_base": 10.0,
-    "percentage_of_total": 0.8099378672011788,
-    "average": 16.428571428571427
-  },
-  {
-    "count": 4,
-    "total": 100.0,
-    "name": "2023 P4A Pressed Pennies (set of 4)",
-    "base_price": 25.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.7042937975662423,
-    "average": 25.0
-  },
-  {
-    "count": 1,
-    "total": 95.0,
-    "name": "Picture Books from John's Library with a Bookplate",
-    "base_price": 95.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.6690791076879302,
-    "average": 95.0
-  },
-  {
-    "count": 2,
-    "total": 70.0,
-    "name": "2023 T-shirt",
-    "base_price": 35.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.4930056582963696,
-    "average": 35.0
-  },
-  {
-    "count": 3,
-    "total": 60.0,
-    "name": "Hank's TikTok Drafts",
-    "base_price": 20.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.4225762785397454,
-    "average": 20.0
-  },
-  {
-    "count": 6,
-    "total": 48.0,
-    "name": "Crabulo.us Monthly Subscription",
-    "base_price": 8.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.3380610228317963,
-    "average": 8.0
-  },
-  {
-    "count": 4,
-    "total": 45.2,
-    "name": null,
-    "base_price": NaN,
-    "raised_over_base": NaN,
-    "percentage_of_total": 0.31834079649994157,
-    "average": 11.3
-  },
-  {
-    "count": 1,
-    "total": 35.0,
-    "name": "P4A Logo Beanie",
-    "base_price": 35.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.2465028291481848,
-    "average": 35.0
-  },
-  {
-    "count": 1,
-    "total": 23.0,
-    "name": "John's TikTok Drafts",
-    "base_price": 23.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.16198757344023573,
-    "average": 23.0
-  },
-  {
-    "count": 1,
-    "total": 22.0,
-    "name": "2023 P4A Iron-On Patch",
-    "base_price": 22.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.1549446354645733,
-    "average": 22.0
-  },
-  {
-    "count": 1,
-    "total": 15.0,
-    "name": "SciShow Space 2023 Calendar",
-    "base_price": 15.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.10564406963493635,
-    "average": 15.0
-  },
-  {
-    "count": 1,
-    "total": 15.0,
-    "name": "Nerdfighter Knit Socks Patterns",
-    "base_price": 15.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.10564406963493635,
-    "average": 15.0
-  },
-  {
-    "count": 1,
-    "total": 15.0,
-    "name": "2023 P4A Sticky Notes",
-    "base_price": 15.0,
-    "raised_over_base": 0.0,
-    "percentage_of_total": 0.10564406963493635,
-    "average": 15.0
-  }
-];
-        let anonymousStatistics = [
-  {
-    "count": 109,
-    "total": 11051.2,
-    "who": "Other"
-  },
-  {
-    "count": 26,
-    "total": 3147.42,
-    "who": "Anonymous"
-  }
-];
-        let decimalStatistics = [
-  {
-    "after_decimal": "00",
-    "amount": 133
-  },
-  {
-    "after_decimal": "20",
-    "amount": 1
-  },
-  {
-    "after_decimal": "42",
-    "amount": 1
-  }
-];
-        let decimalWarStatistics = [
-  {
-    "after_decimal": "42",
-    "minutes": 483.35,
-    "percentage_of_total": 92.64192893011845
-  },
-  {
-    "after_decimal": "00",
-    "minutes": 38.39,
-    "percentage_of_total": 7.35807106988155
-  }
-];
+        let rewardStatistics = [];
+        let anonymousStatistics = [];
+        let decimalStatistics = [];
+        let decimalWarStatistics = [];
         let decimalWarStreamStatistics = [];
         let moneyFormatterParams = {"symbol": "$"};
 
@@ -450,7 +180,7 @@
                 <div class="col">
                     <h2>Rewards</h2>
                     
-                        <p>Data last retrieved Feb. 15, 2023, 3:41 p.m. UTC</p>
+                        <p>Data last retrieved Feb. 15, 2023, 3:45 p.m. UTC</p>
                     
 
                     <div style="padding-bottom: 20px">
@@ -785,7 +515,7 @@ Your reward will be an exclusive vlogbrothers video from Hank &amp; John filmed 
                                     </p>
                                     <button class="btn btn-sm btn-info">
     
-        981 / 1000
+        980 / 1000
     
 </button>
 
@@ -1808,7 +1538,7 @@ Sizes XS-5XL
                 <div class="col">
                     <h2>Reward statistics</h2>
                     
-                        <p>Data last retrieved Feb. 15, 2023, 3:41 p.m. UTC</p>
+                        <p>Data last retrieved Feb. 15, 2023, 3:45 p.m. UTC</p>
                     
                     <div style="max-width: 1500px">
                         <table id="reward-statistics"></table>
@@ -1824,7 +1554,7 @@ Sizes XS-5XL
                 <div class="col">
                     <h2>Anonymous statistics</h2>
                     
-                        <p>Data last retrieved Feb. 15, 2023, 3:41 p.m. UTC</p>
+                        <p>Data last retrieved Feb. 15, 2023, 3:45 p.m. UTC</p>
                     
                     <div style="max-width: 500px; margin: 0 auto;">
                         <table id="anonymous-statistics"></table>
@@ -1840,7 +1570,7 @@ Sizes XS-5XL
                 <div class="col">
                     <h2>Decimal value statistics</h2>
                     
-                        <p>Data last retrieved Feb. 15, 2023, 3:41 p.m. UTC</p>
+                        <p>Data last retrieved Feb. 15, 2023, 3:45 p.m. UTC</p>
                     
                     <div style="max-width: 500px; margin: 0 auto">
                         <table id="decimal-statistics"></table>
@@ -1855,7 +1585,7 @@ Sizes XS-5XL
                 <div class="col">
                     <h2>Decimal war</h2>
                     
-                        <p>Data last retrieved Feb. 15, 2023, 3:41 p.m. UTC</p>
+                        <p>Data last retrieved Feb. 15, 2023, 3:45 p.m. UTC</p>
                     
                 </div>
             </div>
@@ -1883,7 +1613,7 @@ Sizes XS-5XL
                 <div class="col">
                     <h2>Polls</h2>
                     
-                        <p>Data last retrieved Feb. 15, 2023, 3:41 p.m. UTC</p>
+                        <p>Data last retrieved Feb. 15, 2023, 3:45 p.m. UTC</p>
                     
                     <table class="table" style="max-width: 2000px; margin: 0 auto;">
                         <thead>
@@ -1906,7 +1636,7 @@ Sizes XS-5XL
     </div>
 </div>
 <footer class="footer fixed-bottom text-center bg-light">
-    Generated: Feb. 15, 2023, 3:44 p.m. UTC.
+    Generated: Feb. 15, 2023, 3:49 p.m. UTC.
     Developed by <a href="https://twitter.com/miki_cz" target="_blank">Miki</a>,
     source on <a target="_blank" href="https://github.com/mikicz/p4a-portal">GitHub</a>.
 </footer>
