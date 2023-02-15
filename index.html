@@ -1,1 +1,2104 @@
-Placeholder
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+            integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.4.3/js/tabulator.min.js"
+            integrity="sha512-xu/xzHeJxvPLt6tuy68mvBtY4XCDpGmMe1AV4+S1viFUvy0Qygmoq1yePeDenRRNRSqYx3GvucTAnsGiO0FRaA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.4.3/js/jquery_wrapper.min.js"
+            integrity="sha512-Q+u5tqLUv7zbQ1QBm6Pcwc2N2PbqrRC//Ze2YGnlSe5TBbO0KrCYZ/WvgjTlNnzVtOHU9pNoztQjJxpSXa5boQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.4.3/css/tabulator.min.css"
+          integrity="sha512-gHU0A38WiT7Jyubh7KcU6af64wRVBnNEB1541Ue5W050dRL/f21IWkAD8sl85nVjPyLnbffiXsCborGDQ55bYQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <script type="application/javascript">
+        let rewardStatistics = [
+  {
+    "count": 7,
+    "total": 2100.0,
+    "name": "Hanklerfish Art",
+    "base_price": 300.0,
+    "raised_over_base": 0.0,
+    "percentage_of_total": 93.37483325922632,
+    "average": 300.0
+  },
+  {
+    "count": 1,
+    "total": 85.0,
+    "name": "Signed John Green Book",
+    "base_price": 85.0,
+    "raised_over_base": 0.0,
+    "percentage_of_total": 3.7794575366829704,
+    "average": 85.0
+  },
+  {
+    "count": 1,
+    "total": 25.0,
+    "name": "2023 P4A Commemorative Coin",
+    "base_price": 25.0,
+    "raised_over_base": 0.0,
+    "percentage_of_total": 1.1116051578479325,
+    "average": 25.0
+  },
+  {
+    "count": 1,
+    "total": 24.0,
+    "name": "2023 P4A Enamel Pin",
+    "base_price": 24.0,
+    "raised_over_base": 0.0,
+    "percentage_of_total": 1.0671409515340151,
+    "average": 24.0
+  },
+  {
+    "count": 1,
+    "total": 15.0,
+    "name": "Exclusive Dear Hank & John Episode",
+    "base_price": 15.0,
+    "raised_over_base": 0.0,
+    "percentage_of_total": 0.6669630947087595,
+    "average": 15.0
+  }
+];
+        let anonymousStatistics = [
+  {
+    "count": 6,
+    "total": 1239.0,
+    "who": "Other"
+  },
+  {
+    "count": 5,
+    "total": 1010.0,
+    "who": "Anonymous"
+  }
+];
+        let decimalStatistics = [
+  {
+    "after_decimal": "00",
+    "amount": 11
+  }
+];
+        let decimalWarStatistics = [];
+        let decimalWarStreamStatistics = [];
+        let moneyFormatterParams = {"symbol": "$"};
+
+        function percentage(cell, formatterParams, onRendered) {
+            return Math.round(cell.getValue() * 100) / 100 + " %"
+        }
+
+        $(document).ready(function () {
+            $("#reward-statistics").tabulator({
+                data: rewardStatistics,
+                layout: "fitColumns",
+                height: 800,
+                columns: [
+                    {"title": "Reward name", "field": "name"},
+                    {"title": "Count", "field": "count", "width": 100},
+                    {
+                        "title": "Total raised", "field": "total", "formatter": "money",
+                        "formatterParams": moneyFormatterParams, "width": 200
+                    },
+                    {
+                        "title": "Raised over base price", "field": "raised_over_base", "formatter": "money",
+                        "formatterParams": moneyFormatterParams, "width": 200
+                    },
+                    {
+                        "title": "Percentage of total", "field": "percentage_of_total", "formatter": percentage,
+                        "width": 200
+                    },
+                    {
+                        "title": "Base price", "field": "base_price", "formatter": "money",
+                        "formatterParams": moneyFormatterParams, "width": 200
+                    },
+                    {
+                        "title": "Average donation", "field": "average", "formatter": "money",
+                        "formatterParams": moneyFormatterParams, "width": 200
+                    },
+                ]
+            });
+            $("#decimal-statistics").tabulator({
+                data: decimalStatistics,
+                layout: "fitColumns",
+                height: 800,
+                columns: [
+                    {"title": "After decimal", "field": "after_decimal"},
+                    {"title": "Amount", "field": "amount"},
+                ]
+            });
+            $("#anonymous-statistics").tabulator({
+                data: anonymousStatistics,
+                layout: "fitColumns",
+                columns: [
+                    {"title": "Who", "field": "who"},
+                    {"title": "Count", "field": "count", "width": 100},
+                    {
+                        "title": "Total raised", "field": "total", "formatter": "money",
+                        "formatterParams": moneyFormatterParams, "width": 200
+                    },
+                ]
+            });
+
+            let decimalWarColumns = [
+                {"title": "Total after decimal", "field": "after_decimal"},
+                {"title": "Minutes", "field": "minutes"},
+                {"title": "Percentage of total", "field": "percentage_of_total", "formatter": percentage},
+            ];
+            $("#decimal-war-statistics").tabulator({
+                data: decimalWarStatistics,
+                layout: "fitColumns",
+                columns: decimalWarColumns,
+            });
+            $("#decimal-war-stream-statistics").tabulator({
+                data: decimalWarStreamStatistics,
+                layout: "fitColumns",
+                columns: decimalWarColumns,
+            });
+        })
+
+    </script>
+
+    <title>Project for Awesome 2023</title>
+
+    <style>
+        .tab-pane {
+            margin: 10px;
+        }
+
+        footer {
+            padding: 5px;
+        }
+
+        #myTabContent {
+            margin-bottom: 35px;
+        }
+    </style>
+</head>
+<body>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="rewards-list-tab" data-bs-toggle="tab"
+                data-bs-target="#rewards-list-tab-pane"
+                type="button"
+                role="tab" aria-controls="rewards-list-tab-pane" aria-selected="true">
+            Rewards
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="rewards-tab" data-bs-toggle="tab" data-bs-target="#rewards-tab-pane"
+                type="button"
+                role="tab" aria-controls="rewards-tab-pane" aria-selected="false">
+            Reward statistics
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="anonymous-tab" data-bs-toggle="tab" data-bs-target="#anonymous-tab-pane"
+                type="button"
+                role="tab" aria-controls="anonymous-tab-pane" aria-selected="false">
+            Anonymous statistics
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="decimal-stats-tab" data-bs-toggle="tab" data-bs-target="#decimal-stats-tab-pane"
+                type="button"
+                role="tab" aria-controls="decimal-stats-tab-pane" aria-selected="false">
+            Decimal value statistics
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="decimal-war-tab" data-bs-toggle="tab" data-bs-target="#decimal-war-tab-pane"
+                type="button" role="tab" aria-controls="decimal-war-tab-pane" aria-selected="false">
+            Decimal war
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="polls-tab" data-bs-toggle="tab" data-bs-target="#polls-tab-pane"
+                type="button" role="tab" aria-controls="polls-tab-pane" aria-selected="false">
+            Polls
+        </button>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="rewards-list-tab-pane" role="tabpanel" aria-labelledby="rewards-list-tab"
+         tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Rewards</h2>
+                    
+                        <p>Data last retrieved Feb. 15, 2023, 8:45 a.m. UTC</p>
+                    
+
+                    <div style="padding-bottom: 20px">
+                        <div class="btn-group">
+                            <button type="button" id="btn-reset-all" class="btn btn-success">Reset</button>
+                        </div>
+                        <div class="btn-group btn-availability">
+                            <button type="button" id="btn-availability-all" class="btn btn-primary">All</button>
+                            <button type="button" id="btn-availability-true" class="btn btn-secondary">Available
+                            </button>
+                            <button type="button" id="btn-availability-false" class="btn btn-secondary">Unavailable
+                            </button>
+                        </div>
+                        <div class="btn-group btn-virtual">
+                            <button type="button" id="btn-virtual-all" class="btn btn-primary">All</button>
+                            <button type="button" id="btn-virtual-true" class="btn btn-secondary">Virtual</button>
+                            <button type="button" id="btn-virtual-false" class="btn btn-secondary">Physical</button>
+                        </div>
+                        <div class="btn-group btn-limited">
+                            <button type="button" id="btn-limited-all" class="btn btn-primary">All</button>
+                            <button type="button" id="btn-limited-true" class="btn btn-secondary">Limited</button>
+                            <button type="button" id="btn-limited-false" class="btn btn-secondary">Unlimited</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" id="btn-count" class="btn btn-light">Showing 49</button>
+                        </div>
+                    </div>
+
+
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 P4A Sticky Notes <small>$15.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Have a great thought? Write it down on a P4A notepad!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181411" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181411/blob-d4a7aa8e-57ef-433b-9788-bf9a6a69c11b.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Have a great thought? Write it down on a P4A notepad!" title="Have a great thought? Write it down on a P4A notepad!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Exclusive Dear Hank &amp; John Episode <small>$15.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                An exclusive episode of Dear Hank &amp; John, never available ANYWHERE ELSE! We&#x27;ll collect questions from people who got this perk after P4A. Included in the digital download bundle.
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181390" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181390/blob-8286e320-3ee5-4157-8be6-1adc6b003462.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="An exclusive episode of Dear Hank &amp; John, never available ANYWHERE ELSE! We&#x27;ll collect questions from people who got this perk after P4A. Included in the digital download bundle." title="An exclusive episode of Dear Hank &amp; John, never available ANYWHERE ELSE! We&#x27;ll collect questions from people who got this perk after P4A. Included in the digital download bundle.">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hank&#x27;s TikTok Drafts <small>$20.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Watch Hank&#x27;s Tiktok Drafts! &quot;This has so much gold in it this year&quot; - Hank. Included in the digital download bundle.
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181392" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181392/blob-52ee38ed-18f9-4190-83a5-afe24be34721.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Watch Hank&#x27;s Tiktok Drafts! &quot;This has so much gold in it this year&quot; - Hank. Included in the digital download bundle." title="Watch Hank&#x27;s Tiktok Drafts! &quot;This has so much gold in it this year&quot; - Hank. Included in the digital download bundle.">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 P4A Iron-On Patch <small>$22.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Calling all cool kids for this retro-inspired embroidered patch for your collection!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181409" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181409/blob-6ea4699f-eff7-4b66-9147-2e225f1278da.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Calling all cool kids for this retro-inspired embroidered patch for your collection!" title="Calling all cool kids for this retro-inspired embroidered patch for your collection!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">John&#x27;s TikTok Drafts <small>$23.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                John has made over 150 Tiktoks that were privated. Purchase this perk, and you can watch them! Included in the digital download bundle.
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181415" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181415/blob-80513216-4552-46b8-b49d-c1c3a0a2923d.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="John has made over 150 Tiktoks that were privated. Purchase this perk, and you can watch them! Included in the digital download bundle." title="John has made over 150 Tiktoks that were privated. Purchase this perk, and you can watch them! Included in the digital download bundle.">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 P4A Enamel Pin <small>$24.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Get this exclusive P4A 2023 pin inspired by Bizarre Beasts! 
+Special thanks to nerdfighter Kimmy for designing this pin!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181403" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181403/blob-13b85232-4c1c-47bb-b098-e05fb2dbd13e.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Get this exclusive P4A 2023 pin inspired by Bizarre Beasts! 
+Special thanks to nerdfighter Kimmy for designing this pin!" title="Get this exclusive P4A 2023 pin inspired by Bizarre Beasts! 
+Special thanks to nerdfighter Kimmy for designing this pin!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 P4A Commemorative Coin <small>$25.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                This special coin commemorates the 16th annual Project for Awesome! 
+Special Thanks to designer Savannah Geary!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181405" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181405/blob-1f83bc43-e37a-4bde-b7c3-bbf0e0c7e032.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="This special coin commemorates the 16th annual Project for Awesome! 
+Special Thanks to designer Savannah Geary!" title="This special coin commemorates the 16th annual Project for Awesome! 
+Special Thanks to designer Savannah Geary!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 P4A Pressed Pennies (set of 4) <small>$25.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                John doesn&#x27;t like pennies, so we&#x27;ve made it a tradition to SMASH THEM! Get a set of four pressed pennies designed by Levi Johnson, featuring a tribute to Canada Geese, Being Crabulous, Dear John &amp; Hank, and a good ole slice of pizza john
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181406" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181406/blob-e4ccce33-cf0f-4cf3-904e-924a48b5d680.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="John doesn&#x27;t like pennies, so we&#x27;ve made it a tradition to SMASH THEM! Get a set of four pressed pennies designed by Levi Johnson, featuring a tribute to Canada Geese, Being Crabulous, Dear John &amp; Hank, and a good ole slice of pizza john" title="John doesn&#x27;t like pennies, so we&#x27;ve made it a tradition to SMASH THEM! Get a set of four pressed pennies designed by Levi Johnson, featuring a tribute to Canada Geese, Being Crabulous, Dear John &amp; Hank, and a good ole slice of pizza john">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 T-shirt <small>$35.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                P4A is a collaborative effort, we truly couldn&#x27;t do it without walking hand in hand with our partners and friends! Designed by Katie Brink.
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181407" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181407/blob-b41bc2ae-2445-4b19-ad2c-d0140ef86d86.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="P4A is a collaborative effort, we truly couldn&#x27;t do it without walking hand in hand with our partners and friends! Designed by Katie Brink." title="P4A is a collaborative effort, we truly couldn&#x27;t do it without walking hand in hand with our partners and friends! Designed by Katie Brink.">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">P4A Logo Beanie <small>$35.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Keep warm with this P4A Beanie!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181404" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181404/blob-e7ec4262-e9cf-48e8-84b9-f67da5ef3a8f.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Keep warm with this P4A Beanie!" title="Keep warm with this P4A Beanie!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hank Thanks <small>$65.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Want to be in a Hank Tiktok? Get this perk, and Hank will give you a shoutout in a Tiktok!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        50 / 50
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181391" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181391/blob-168ad504-7a0d-4783-880a-fdf2f2594079.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Want to be in a Hank Tiktok? Get this perk, and Hank will give you a shoutout in a Tiktok!" title="Want to be in a Hank Tiktok? Get this perk, and Hank will give you a shoutout in a Tiktok!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">John&#x27;s TikTok Thanks <small>$65.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Want to be in a John Tiktok? Get this perk, and John will give you a shoutout in a Tiktok!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        35 / 35
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181418" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181418/blob-86774aed-cc67-4d88-a051-527fe45ffdba.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Want to be in a John Tiktok? Get this perk, and John will give you a shoutout in a Tiktok!" title="Want to be in a John Tiktok? Get this perk, and John will give you a shoutout in a Tiktok!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">2023 P4A Quarter Zip <small>$70.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                You loved the hoodie last year, and now fall in love with our P4A Quarter-Zip! Designed by Faith Schmidt. 
+Sizes XS-5XL
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181410" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181410/blob-d6eb8b1e-a8a2-464c-b0bd-5379fc61beb5.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="You loved the hoodie last year, and now fall in love with our P4A Quarter-Zip! Designed by Faith Schmidt. 
+Sizes XS-5XL" title="You loved the hoodie last year, and now fall in love with our P4A Quarter-Zip! Designed by Faith Schmidt. 
+Sizes XS-5XL">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed John Green Book <small>$85.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                A signed copy of a John Green book (in English). You won&#x27;t know which book you get but you&#x27;ll get one of them!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        199 / 200
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181420" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181420/blob-83fe6312-d1af-4545-84eb-05eff450f914.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="A signed copy of a John Green book (in English). You won&#x27;t know which book you get but you&#x27;ll get one of them!" title="A signed copy of a John Green book (in English). You won&#x27;t know which book you get but you&#x27;ll get one of them!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed John Green Book Foreign Editions <small>$100.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                A SIGNED foreign edition of one of John&#x27;s books! Which one? It&#x27;ll be a surprise!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        50 / 50
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181421" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181421/blob-c8711c3e-1907-4b6d-aea2-435150237fd9.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="A SIGNED foreign edition of one of John&#x27;s books! Which one? It&#x27;ll be a surprise!" title="A SIGNED foreign edition of one of John&#x27;s books! Which one? It&#x27;ll be a surprise!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hanklerfish Art <small>$300.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Last year&#x27;s trash (the dropcloth Hank used to create Hanklerfish of the past) becomes this year&#x27;s treasure (a new medium for Hanklerfish past and present)! 8x8 framed &amp; Signed Hanklerfish!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        93 / 100
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181401" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181401/blob-8992e93e-917b-4b6f-88bb-a84473cd7156.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Last year&#x27;s trash (the dropcloth Hank used to create Hanklerfish of the past) becomes this year&#x27;s treasure (a new medium for Hanklerfish past and present)! 8x8 framed &amp; Signed Hanklerfish!" title="Last year&#x27;s trash (the dropcloth Hank used to create Hanklerfish of the past) becomes this year&#x27;s treasure (a new medium for Hanklerfish past and present)! 8x8 framed &amp; Signed Hanklerfish!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Dear Hank &amp; John Personal Message <small>$350.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Hank and/or John will read a personal message from you on Dear Hank &amp; John! This is a great way to give a shoutout/message of love to your friends, family, or anyone you like a lot! ...Or just have John or Hank say a series of weird words. It&#x27;s up to you!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        25 / 25
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181389" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181389/blob-f79d243d-da37-4a0d-8c36-00e482cf280b.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Hank and/or John will read a personal message from you on Dear Hank &amp; John! This is a great way to give a shoutout/message of love to your friends, family, or anyone you like a lot! ...Or just have John or Hank say a series of weird words. It&#x27;s up to you!" title="Hank and/or John will read a personal message from you on Dear Hank &amp; John! This is a great way to give a shoutout/message of love to your friends, family, or anyone you like a lot! ...Or just have John or Hank say a series of weird words. It&#x27;s up to you!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Get Animated into Crash Course <small>$425.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Thought Café will create your very own character, and you&#x27;ll be animated into the end of an upcoming Crash Course episode!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        20 / 20
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181702" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181702/blob-2e7af7f0-6842-42e5-8ab1-f5944a09f7e1.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Thought Café will create your very own character, and you&#x27;ll be animated into the end of an upcoming Crash Course episode!" title="Thought Café will create your very own character, and you&#x27;ll be animated into the end of an upcoming Crash Course episode!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">P4A Quilt <small>$1050.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                A gorgeous, handmade quilt by nerdfighter Kailey deWeever just for the P4A!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181425" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181425/blob-94f37b32-765f-4a8e-b9c5-6ce2c0a956e0.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="A gorgeous, handmade quilt by nerdfighter Kailey deWeever just for the P4A!" title="A gorgeous, handmade quilt by nerdfighter Kailey deWeever just for the P4A!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-active card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Personalized Book Recommendations from John Green <small>$1500.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                A private Zoom with John where you tell him some of your favorite books, and then John will put together a brief reading list for you based on the books that you like!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        6 / 6
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+    <a href="https://tiltify.com/+p4a-producers/project-for-awesome-2023/donate/rewards/181416" class="btn btn-sm btn-primary"
+       target="_blank">
+        Donate
+    </a>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181416/blob-99479189-d449-4670-8a77-f0b5c4534c1b.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="A private Zoom with John where you tell him some of your favorite books, and then John will put together a brief reading list for you based on the books that you like!" title="A private Zoom with John where you tell him some of your favorite books, and then John will put together a brief reading list for you based on the books that you like!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Dadcast with Hank and Travis <small>$12.00</small></h5>
+                                    <p class="card-text">
+                                        Hank and Travis McElroy have been dads for five whole years! Perk donors get to send in questions and listen to what they have to say about being fathers now that they are significantly more experienced and wiser! Included in the digital download bundle.
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hank&#x27;s Confetti <small>$15.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                A new tradition! At some point in the livestream Hank will make it rain with confetti! Then we will send that confetti to YOU!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        100 / 100
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181397/blob-a1d3f488-27c0-4536-9050-6895fa60a0a1.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="A new tradition! At some point in the livestream Hank will make it rain with confetti! Then we will send that confetti to YOU!" title="A new tradition! At some point in the livestream Hank will make it rain with confetti! Then we will send that confetti to YOU!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">John &amp; Rosianna Exclusive Podcast <small>$15.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Topic TBD
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181419/blob-be29efe8-dd8c-4c44-81b5-c833ca611dbb.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Topic TBD" title="Topic TBD">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">SCB Mystery Pins! <small>$15.00</small></h5>
+                                    <p class="card-text">
+                                        A mystery pin from the Super Carlin Brothers!
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        100 / 100
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Self Care Bunny Print <small>$25.00</small></h5>
+                                    <p class="card-text">
+                                        A print of an original self care bunny drawing by Rosianna
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        100 / 100
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">2023 P4A Ornament <small>$28.00</small></h5>
+                                    <p class="card-text">
+                                        Bring the Project for Awesome home for the holidays with this ornament!
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Bad Food Bible <small>$50.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                A signed copy of Aaron Carroll&#x27;s Bad Food Bible
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        6 / 6
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181700/blob-02845727-4b3f-4934-b486-4ebbd33b2868.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="A signed copy of Aaron Carroll&#x27;s Bad Food Bible" title="A signed copy of Aaron Carroll&#x27;s Bad Food Bible">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Fish Prop (IYKYK) <small>$50.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a certified Fish Prop straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181712/blob-c3f6c4fd-9a3a-4d62-9ecf-312f0aed8ce4.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a certified Fish Prop straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a certified Fish Prop straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Pokeball <small>$50.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Pokeball straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181710/blob-74e15c1e-d1bb-46e7-b5f2-22de1bc5a13e.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Pokeball straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Pokeball straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">The Anthropocene Reviewed in German! <small>$50.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Though this copy of The Anthropocene Reviewed is damaged (we prefer &quot;well-loved&quot;), John will inscribe it in German for you!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181424/blob-14a9512c-7b0f-4290-94f9-c8e1144512ea.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Though this copy of The Anthropocene Reviewed is damaged (we prefer &quot;well-loved&quot;), John will inscribe it in German for you!" title="Though this copy of The Anthropocene Reviewed is damaged (we prefer &quot;well-loved&quot;), John will inscribe it in German for you!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Semi-Famous Galley Copy <small>$55.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Signed, personalized galley copy of Josh Sundquist&#x27;s book &quot;Semi-Famous: A True Story of Near Celebrity&quot; about which Hank Green said, &quot;This book is so good! It’s full of insight and laugh out loud moments and I have learned a ton from it (which, as a perso
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        8 / 8
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181801/blob-27fd2a10-656a-4b70-929d-8a6f513c18da.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Signed, personalized galley copy of Josh Sundquist&#x27;s book &quot;Semi-Famous: A True Story of Near Celebrity&quot; about which Hank Green said, &quot;This book is so good! It’s full of insight and laugh out loud moments and I have learned a ton from it (which, as a perso" title="Signed, personalized galley copy of Josh Sundquist&#x27;s book &quot;Semi-Famous: A True Story of Near Celebrity&quot; about which Hank Green said, &quot;This book is so good! It’s full of insight and laugh out loud moments and I have learned a ton from it (which, as a perso">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Signed Hank Green Books <small>$100.00</small></h5>
+                                    <p class="card-text">
+                                        Signed Hank Green Book Foreign Edition
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Slotherin Pillow <small>$100.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Slotherin Pillow straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181705/blob-b9ce47d6-9c66-4352-9365-12e4f4a77ea4.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Slotherin Pillow straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Slotherin Pillow straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Slytherin Painting <small>$100.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Slytherin Painting straight from the collection of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181711/blob-6db92a8f-b5f6-4b1c-9872-6902f7ffd461.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Slytherin Painting straight from the collection of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Slytherin Painting straight from the collection of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">A Book From John&#x27;s Library <small>$120.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                We will send you a book from John Green&#x27;s library!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        15 / 15
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181422/blob-fa8e67d5-302a-41d2-9b3d-58901971d16f.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="We will send you a book from John Green&#x27;s library!" title="We will send you a book from John Green&#x27;s library!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Bananagram from John&#x27;s Collection <small>$175.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Every year, John is sent a new Bananagrams game. Now, a game from the collection can be yours!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        5 / 5
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181423/blob-a3691e77-fc0d-4a21-9d49-933b6b63a3cc.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Every year, John is sent a new Bananagrams game. Now, a game from the collection can be yours!" title="Every year, John is sent a new Bananagrams game. Now, a game from the collection can be yours!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Aaron Caroll HCT Zoom Discussion <small>$200.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Be part of an intimate zoom call with Dr. Aaron Carroll where you can discuss Healthcare Triage or anything related to medicine and research (just no personal medical questions). The zoom will be on TBD
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        10 / 10
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181701/blob-5b50b527-fb7d-45c5-8557-74f45038a390.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Be part of an intimate zoom call with Dr. Aaron Carroll where you can discuss Healthcare Triage or anything related to medicine and research (just no personal medical questions). The zoom will be on TBD" title="Be part of an intimate zoom call with Dr. Aaron Carroll where you can discuss Healthcare Triage or anything related to medicine and research (just no personal medical questions). The zoom will be on TBD">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Buzz <small>$200.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Toy Story Buzz straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181707/blob-02bf50ff-9d5d-4f5f-97a7-d2731c858bba.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Toy Story Buzz straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Toy Story Buzz straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Large Mickey Funko <small>$200.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Large Mickey Mouse Funko Pop straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181708/blob-e4e9d9be-d931-4ad9-ac2f-cc3b11ff09c1.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Large Mickey Mouse Funko Pop straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Large Mickey Mouse Funko Pop straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Woody <small>$200.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Toy Story Woody straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181706/blob-9dd073d3-3cd5-494c-b40c-d63afb274fbb.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Toy Story Woody straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Toy Story Woody straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Trivia Night With Hank! <small>$250.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Join a Zoom trivia night with Hank date TBD!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        50 / 50
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181393/blob-47e3bdb7-15b5-4013-9233-0bd121b10528.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Join a Zoom trivia night with Hank date TBD!" title="Join a Zoom trivia night with Hank date TBD!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Trivia Night With Hank! 2 <small>$250.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Join a Zoom trivia night with Hank on TBD
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181394/blob-5373ce94-39f2-412a-bbfc-2516e12df38c.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Join a Zoom trivia night with Hank on TBD" title="Join a Zoom trivia night with Hank on TBD">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Trivia Night With John &amp; Stan #1 <small>$250.00</small></h5>
+                                    <p class="card-text">
+                                        Join John and Stan for a Zoom trivia night on TBD! Note: All of John &amp; Stan&#x27;s trivia nights will use the same questions, so only sign up for one!
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Trivia Night With Stan #2 <small>$250.00</small></h5>
+                                    <p class="card-text">
+                                        Join John and Stan for a Zoom trivia night on TBD! Note: All of John &amp; Stan&#x27;s trivia nights will use the same questions, so only sign up for one!
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-virtual card-unlimited"
+                             style="margin-bottom: 5px">
+                            
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Trivia Night With Stan #3 <small>$250.00</small></h5>
+                                    <p class="card-text">
+                                        Join John and Stan for a Zoom trivia night on TBDT! Note: All of John &amp; Stan&#x27;s trivia nights will use the same questions, so only sign up for one!
+                                    </p>
+                                    <button class="btn btn-sm btn-info">
+    
+        Unlimited
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Virtual
+</button>
+
+
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Black Panther Mask <small>$300.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Black Panther Mask straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181704/blob-f9c9e6ca-c5c8-443b-bb82-7ac806dece09.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Black Panther Mask straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Black Panther Mask straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Signed Boba Fett Helmet <small>$300.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Here&#x27;s a Boba Fett Helmet straight from the set of the Super Carlin Brothers (and signed)!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181703/blob-4a0f2438-bd73-4205-accb-ddc59cecce41.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Here&#x27;s a Boba Fett Helmet straight from the set of the Super Carlin Brothers (and signed)!" title="Here&#x27;s a Boba Fett Helmet straight from the set of the Super Carlin Brothers (and signed)!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hanklerfish Art 2 <small>$350.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                Last year&#x27;s trash (the dropcloth Hank used to create Hanklerfish of the past) becomes this year&#x27;s treasure (a new medium for Hanklerfish past and present)! 8x8 framed &amp; Signed Hanklerfish!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        150 / 150
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181402/blob-de499021-4d6a-4a19-8a79-c8be6e014c1b.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="Last year&#x27;s trash (the dropcloth Hank used to create Hanklerfish of the past) becomes this year&#x27;s treasure (a new medium for Hanklerfish past and present)! 8x8 framed &amp; Signed Hanklerfish!" title="Last year&#x27;s trash (the dropcloth Hank used to create Hanklerfish of the past) becomes this year&#x27;s treasure (a new medium for Hanklerfish past and present)! 8x8 framed &amp; Signed Hanklerfish!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                        <div class="card card-inactive card-physical card-limited"
+                             style="margin-bottom: 5px">
+                            
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-xl-9 col-xxl-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Eye of Agamotto <small>$500.00</small>
+                                            </h5>
+                                            <p class="card-text">
+                                                This Eye of Agamotto comes with a certificate of authentication and a signed picture of the Super Carlin Brothers with the gift!
+                                            </p>
+                                            <button class="btn btn-sm btn-info">
+    
+        1 / 1
+    
+</button>
+<button class="btn btn-sm btn-secondary">
+    Physical
+</button>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-2 text-end">
+                                        <img src="https://assets.tiltify.com/uploads/reward/image/181709/blob-f471d4d1-684c-49e3-bffd-fd4c67136015.png" class="img-fluid rounded-end"
+                                             style="max-height: 175px; max-width: 175px; padding: 5px"
+                                             alt="This Eye of Agamotto comes with a certificate of authentication and a signed picture of the Super Carlin Brothers with the gift!" title="This Eye of Agamotto comes with a certificate of authentication and a signed picture of the Super Carlin Brothers with the gift!">
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="rewards-tab-pane" role="tabpanel" aria-labelledby="rewards-tab"
+         tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Reward statistics</h2>
+                    
+                        <p>Data last retrieved Feb. 15, 2023, 8:45 a.m. UTC</p>
+                    
+                    <div style="max-width: 1500px">
+                        <table id="reward-statistics"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="anonymous-tab-pane" role="tabpanel" aria-labelledby="anonymous-tab" tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Anonymous statistics</h2>
+                    
+                        <p>Data last retrieved Feb. 15, 2023, 8:45 a.m. UTC</p>
+                    
+                    <div style="max-width: 500px; margin: 0 auto;">
+                        <table id="anonymous-statistics"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="decimal-stats-tab-pane" role="tabpanel" aria-labelledby="decimal-stats-tab"
+         tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Decimal value statistics</h2>
+                    
+                        <p>Data last retrieved Feb. 15, 2023, 8:45 a.m. UTC</p>
+                    
+                    <div style="max-width: 500px; margin: 0 auto">
+                        <table id="decimal-statistics"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="decimal-war-tab-pane" role="tabpanel" aria-labelledby="decimal-war-tab" tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Decimal war</h2>
+                    
+                        <p>Data last retrieved Feb. 15, 2023, 8:45 a.m. UTC</p>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3>Overall</h3>
+                    <div style="max-width: 500px; margin-top: 50px">
+                        <table id="decimal-war-statistics"></table>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>During stream</h3>
+                    <div style="max-width: 500px; margin-top: 50px">
+                        <table id="decimal-war-stream-statistics"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="tab-pane fade" id="polls-tab-pane" role="tabpanel" aria-labelledby="polls-tab" tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Polls</h2>
+                    
+                        <p>Data last retrieved Feb. 15, 2023, 8:45 a.m. UTC</p>
+                    
+                    <table class="table" style="max-width: 2000px; margin: 0 auto;">
+                        <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th style="min-width: 190px">Created (UTC)</th>
+                            <th style="min-width: 190px">Finished (UTC)</th>
+                            <th style="min-width: 120px">Total raised</th>
+                            <th style="min-width: 250px">Option</th>
+                            <th style="min-width: 120px">Raised</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer fixed-bottom text-center bg-light">
+    Generated: Feb. 15, 2023, 8:49 a.m. UTC.
+    Developed by <a href="https://twitter.com/miki_cz" target="_blank">Miki</a>,
+    source on <a target="_blank" href="https://github.com/mikicz/p4a-portal">GitHub</a>.
+</footer>
+
+<script type="application/javascript">
+    let filters = {
+        availability: null,
+        virtual: null,
+        limited: null,
+    };
+
+    function getStr(key) {
+        if (filters[key] === true) return "true";
+        if (filters[key] === false) return "false";
+        return "all"
+    }
+
+    function updateButtons() {
+        $(".btn-availability .btn").removeClass("btn-primary").addClass("btn-secondary");
+        $(".btn-virtual .btn").removeClass("btn-primary").addClass("btn-secondary");
+        $(".btn-limited .btn").removeClass("btn-primary").addClass("btn-secondary");
+        $("#btn-availability-" + getStr("availability")).addClass("btn-primary").removeClass("btn-secondary");
+        $("#btn-virtual-" + getStr("virtual")).addClass("btn-primary").removeClass("btn-secondary");
+        $("#btn-limited-" + getStr("limited")).addClass("btn-primary").removeClass("btn-secondary");
+    }
+
+    function shouldShow(card) {
+        let show = true;
+        if (card.hasClass("card-active") && filters.availability === false) {
+            show = false;
+        }
+        if (card.hasClass("card-inactive") && filters.availability === true) {
+            show = false;
+        }
+        if (card.hasClass("card-virtual") && filters.virtual === false) {
+            show = false;
+        }
+        if (card.hasClass("card-physical") && filters.virtual === true) {
+            show = false;
+        }
+        if (card.hasClass("card-limited") && filters.limited === false) {
+            show = false;
+        }
+        if (card.hasClass("card-unlimited") && filters.limited === true) {
+            show = false;
+        }
+
+        return show
+    }
+
+    function updateCards() {
+        let showing = 0;
+        $(".card").each(function () {
+            let card = $(this);
+            if (shouldShow(card)) {
+                card.slideDown();
+                showing += 1;
+            } else {
+                card.slideUp();
+            }
+        })
+        $("#btn-count").text("Showing " + showing)
+    }
+
+    function set(key, value) {
+        filters[key] = value;
+        updateButtons();
+        updateCards();
+    }
+
+    $(document).ready(function () {
+        $("#btn-reset-all").click(function () {
+            filters.availability = null;
+            filters.virtual = null;
+            filters.limited = null;
+            updateButtons();
+            updateCards();
+        });
+        $("#btn-availability-all").click(function () {
+            set("availability", null)
+        });
+        $("#btn-availability-true").click(function () {
+            set("availability", true)
+        });
+        $("#btn-availability-false").click(function () {
+            set("availability", false)
+        });
+        $("#btn-virtual-all").click(function () {
+            set("virtual", null)
+        });
+        $("#btn-virtual-true").click(function () {
+            set("virtual", true)
+        });
+        $("#btn-virtual-false").click(function () {
+            set("virtual", false)
+        });
+        $("#btn-limited-all").click(function () {
+            set("limited", null)
+        });
+        $("#btn-limited-true").click(function () {
+            set("limited", true)
+        });
+        $("#btn-limited-false").click(function () {
+            set("limited", false)
+        });
+
+    })
+
+</script>
+
+</body>
+
+</html>
